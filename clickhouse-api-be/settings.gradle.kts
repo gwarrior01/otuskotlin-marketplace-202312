@@ -1,4 +1,4 @@
-rootProject.name = "project-be"
+rootProject.name = "clickhouse-api-be"
 
 dependencyResolutionManagement {
     versionCatalogs {

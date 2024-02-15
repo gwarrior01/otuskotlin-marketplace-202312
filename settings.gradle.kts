@@ -11,4 +11,4 @@ plugins {
 rootProject.name = "otuskotlin-marketplace-202312"
 
 includeBuild("lessons")
-includeBuild("project-be")
+includeBuild("clickhouse-api-be")
