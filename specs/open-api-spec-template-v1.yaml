@@ -1,0 +1,396 @@
+openapi: 3.0.3
+info:
+  title: "Clickhouse query templates API ${VERSION_APP}"
+  description: This app can manage your query templates to Clickhouse
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/v1
+tags:
+  - name: Template
+paths:
+  /template/create:
+    post:
+      tags:
+        - Template
+      summary: Create query template
+      operationId: templateCreate
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateCreateRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateCreateResponse'
+  /template/read:
+    post:
+      tags:
+        - Template
+      summary: Read query template
+      operationId: templateRead
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateReadRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateReadResponse'
+  /template/update:
+    post:
+      tags:
+        - Template
+      summary: Update query template
+      operationId: templateUpdate
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateUpdateResponse'
+  /template/delete:
+    post:
+      tags:
+        - Template
+      summary: Delete query template
+      operationId: templateDelete
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateDeleteRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateDeleteResponse'
+  /template/search:
+    post:
+      tags:
+        - Template
+      summary: Search query template
+      operationId: templateSearch
+      requestBody:
+        description: Request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateSearchRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateSearchResponse'
+components:
+  schemas:
+    BaseRequest:
+      type: object
+      description: Базовый интерфейс для всех запросов
+      properties:
+        requestType:
+          type: string
+          description: Поле-дескриминатор для вычисления типа запроса
+          example: create
+      discriminator:
+        propertyName: requestType
+        mapping:
+          create: '#/components/schemas/TemplateCreateRequest'
+          read:   '#/components/schemas/TemplateReadRequest'
+          update: '#/components/schemas/TemplateUpdateRequest'
+          delete: '#/components/schemas/TemplateDeleteRequest'
+          search: '#/components/schemas/TemplateSearchRequest'
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        group:
+          type: string
+        field:
+          type: string
+        message:
+          type: string
+
+    ResponseResult:
+      type: string
+      enum:
+        - success
+        - error
+
+    BaseResponse:
+      type: object
+      description: Базовый интерфейс для всех ответов
+      properties:
+        responseType:
+          type: string
+          description: Поле-дескриминатор для вычисления типа запроса
+          example: create
+        result:
+          $ref: '#/components/schemas/ResponseResult'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+
+      discriminator:
+        propertyName: responseType
+        mapping:
+          create: '#/components/schemas/TemplateCreateResponse'
+          read:   '#/components/schemas/TemplateReadResponse'
+          update: '#/components/schemas/TemplateUpdateResponse'
+          delete: '#/components/schemas/TemplateDeleteResponse'
+          search: '#/components/schemas/TemplateSearchResponse'
+          init: '#/components/schemas/TemplateInitResponse'
+
+    UserId:
+      type: string
+      description: Идентификатор пользователя
+    TemplateId:
+      type: string
+      description: Идентификатор шаблона
+    TemplateLock:
+      type: string
+      description: Версия оптимистичной блокировки
+
+    BaseTemplate:
+      type: object
+      description: Объект описывает свойства, одинаковые для create и update
+      properties:
+        title:
+          type: string
+          description: Заголовок шаблона
+        description:
+          type: string
+          description: Описание шаблона
+        visibility:
+          $ref: '#/components/schemas/TemplateVisibility'
+
+    TemplateVisibility:
+      type: string
+      description: 'Тип видимости шаблона. Возможные значения: видит только владелец, только зарегистрированный в системе пользователь, видимо всем'
+      enum:
+        - ownerOnly
+        - registeredOnly
+        - public
+
+    TemplateInitResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+
+    TemplateCreateObject:
+      allOf:
+        - $ref: '#/components/schemas/BaseTemplate'
+
+    TemplateCreateRequest:
+      allOf:
+        - $ref: '#/components/schemas/BaseRequest'
+        - $ref: '#/components/schemas/TemplateRequestDebug'
+        - type: object
+          properties:
+            template:
+              $ref: '#/components/schemas/TemplateCreateObject'
+
+    TemplateReadObject:
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TemplateId'
+
+    TemplateReadRequest:
+      allOf:
+        - $ref: '#/components/schemas/BaseRequest'
+        - $ref: '#/components/schemas/TemplateRequestDebug'
+        - type: object
+          properties:
+            template:
+              $ref: '#/components/schemas/TemplateReadObject'
+
+    TemplateUpdateObject:
+      allOf:
+        - $ref: '#/components/schemas/BaseTemplate'
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TemplateId'
+            lock:
+              $ref: '#/components/schemas/TemplateLock'
+
+    TemplateUpdateRequest:
+      allOf:
+        - $ref: '#/components/schemas/BaseRequest'
+        - $ref: '#/components/schemas/TemplateRequestDebug'
+        - type: object
+          properties:
+            template:
+              $ref: '#/components/schemas/TemplateUpdateObject'
+
+    TemplateDeleteObject:
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/TemplateId'
+            lock:
+              $ref: '#/components/schemas/TemplateLock'
+
+    TemplateDeleteRequest:
+      allOf:
+        - $ref: '#/components/schemas/BaseRequest'
+        - $ref: '#/components/schemas/TemplateRequestDebug'
+        - type: object
+          properties:
+            template:
+              $ref: '#/components/schemas/TemplateDeleteObject'
+
+    TemplateSearchFilter:
+      type: object
+      description: Набор фильтров для поиска
+      properties:
+        searchString:
+          type: string
+          description: Название шаблона, по которому будет производиться поиск
+
+    TemplateSearchRequest:
+      allOf:
+        - $ref: '#/components/schemas/BaseRequest'
+        - $ref: '#/components/schemas/TemplateRequestDebug'
+        - type: object
+          properties:
+            templateFilter:
+              $ref: '#/components/schemas/TemplateSearchFilter'
+
+    TemplateResponseObject:
+      allOf:
+        - $ref: '#/components/schemas/BaseTemplate'
+        - type: object
+          description: Объект, который возвращается в ответе бэкенда
+          properties:
+            id:
+              $ref: '#/components/schemas/TemplateId'
+            ownerId:
+              $ref: '#/components/schemas/UserId'
+            lock:
+              $ref: '#/components/schemas/TemplateLock'
+            permissions:
+              type: array
+              uniqueItems: true
+              items:
+                $ref: '#/components/schemas/TemplatePermissions'
+
+    TemplatePermissions:
+      type: string
+      description: Доступы клиента для операций над шаблонами
+      enum:
+        - read
+        - update
+        - delete
+        - makeVisiblePublic
+        - makeVisibleOwn
+        - makeVisibleGroup
+
+    TemplateResponseSingle:
+      allOf:
+        - type: object
+          description: Ответ с одним объектом шаблона
+          properties:
+            template:
+              $ref: '#/components/schemas/TemplateResponseObject'
+
+    TemplateResponseMulti:
+      allOf:
+        - type: object
+          description: Список найденных объектов
+          properties:
+            templates:
+              type: array
+              items:
+                $ref: '#/components/schemas/TemplateResponseObject'
+
+    TemplateCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - $ref: '#/components/schemas/TemplateResponseSingle'
+
+    TemplateReadResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - $ref: '#/components/schemas/TemplateResponseSingle'
+
+    TemplateUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - $ref: '#/components/schemas/TemplateResponseSingle'
+
+    TemplateDeleteResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - $ref: '#/components/schemas/TemplateResponseSingle'
+
+    TemplateSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - $ref: '#/components/schemas/TemplateResponseMulti'
+
+    # STUBS ======================
+    TemplateRequestDebugMode:
+      type: string
+      enum:
+        - prod
+        - test
+        - stub
+
+    TemplateRequestDebug:
+      type: object
+      properties:
+        debug:
+          $ref: '#/components/schemas/TemplateDebug'
+
+    TemplateDebug:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/TemplateRequestDebugMode'
+        stub:
+          $ref: '#/components/schemas/TemplateRequestDebugStubs'
+
+    TemplateRequestDebugStubs:
+      type: string
+      description: Перечисления всех стабов
+      enum:
+        - success
+        - notFound
+        - badId
+        - badTitle
+        - badDescription
+        - badVisibility
+        - cannotDelete
+        - badSearchString

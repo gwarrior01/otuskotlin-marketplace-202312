@@ -3,14 +3,30 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
 }
 
-group = "com.otus.otuskotlin.marketplace"
+group = "tech.relialab.kotlin.clickhouse.exporter"
 version = "0.0.1"
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
 
 subprojects {
     group = rootProject.group
     version = rootProject.version
+}
 
-    repositories {
-        mavenCentral()
+ext {
+    val specDir = layout.projectDirectory.dir("../specs")
+    set("spec-v1", specDir.file("open-api-spec-template-v1.yaml").toString())
+}
+
+tasks {
+    arrayOf("build", "clean", "check").forEach {tsk ->
+        create(tsk) {
+            group = "build"
+            dependsOn(subprojects.map {  it.getTasksByName(tsk,false)})
+        }
     }
 }
