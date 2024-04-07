@@ -8,7 +8,8 @@ pluginManagement {
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }
-rootProject.name = "otuskotlin-marketplace-202312"
+rootProject.name = "clickhouse-api"
 
 includeBuild("lessons")
 includeBuild("clickhouse-api-be")
+includeBuild("libs")

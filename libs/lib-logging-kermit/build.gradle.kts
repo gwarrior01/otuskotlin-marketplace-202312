@@ -1,17 +1,20 @@
 plugins {
     id("build-kmp")
+    alias(libs.plugins.kotlinx.serialization)
 }
-
-group = rootProject.group
-version = rootProject.version
 
 kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
-                api("tech.relialab.kotlin.libs:lib-logging-common")
-                api(libs.kotlinx.datetime)
+
+                implementation(project(":lib-logging-common"))
+                implementation(libs.coroutines.core)
+                implementation(libs.kermit)
+                implementation(libs.kotlinx.datetime)
+                implementation(libs.kotlinx.serialization.core)
+                implementation(libs.kotlinx.serialization.json)
             }
         }
         val commonTest by getting {
