@@ -1,7 +1,13 @@
 [versions]
 kotlin = "1.9.22"
 kotlinx-datetime = "0.5.0"
+kotlinx-serialization = "1.6.3"
 binaryCompabilityValidator = "0.13.2"
+openapi-generator = "7.3.0"
+crowdproj-generator = "0.2.0"
+
+coroutines = "1.8.0"
+kermit = "2.0.3"
 
 # BASE
 jvm-compiler = "11"
@@ -11,7 +17,15 @@ jvm-language = "17"
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 plugin-binaryCompatibilityValidator = { module = "org.jetbrains.kotlinx:binary-compatibility-validator", version.ref = "binaryCompabilityValidator" }
 kotlinx-datetime = {module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime"}
+kotlinx-serialization-core = {module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization"}
+kotlinx-serialization-json = {module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization"}
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 
 [plugins]
 kotlin-multiplatform = {id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin"}
 kotlin-jvm = {id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"}
+openapi-generator = {id = "org.openapi.generator", version.ref = "openapi-generator"}
+crowdproj-generator = {id = "com.crowdproj.generator", version.ref = "crowdproj-generator"}
+kotlinx-serialization = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}

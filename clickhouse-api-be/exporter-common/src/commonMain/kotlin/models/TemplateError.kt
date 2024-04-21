@@ -1,0 +1,12 @@
+package tech.relialab.kotlin.clickhouse.exporter.common.models
+
+import tech.relialab.kotlin.logging.common.LogLevel
+
+data class TemplateError(
+    val code: String = "",
+    val group: String = "",
+    val field: String = "",
+    val message: String = "",
+    val level: LogLevel = LogLevel.ERROR,
+    val exception: Throwable? = null,
+)

@@ -1,4 +1,4 @@
-rootProject.name = "clickhouse-api-be"
+rootProject.name = "libs"
 
 dependencyResolutionManagement {
     versionCatalogs {
@@ -24,6 +24,5 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }
 
-include(":api-v1-kmp")
-include(":api-v1-mappers")
-include(":exporter-common")
+include(":lib-logging-common")
+include(":lib-logging-kermit")
