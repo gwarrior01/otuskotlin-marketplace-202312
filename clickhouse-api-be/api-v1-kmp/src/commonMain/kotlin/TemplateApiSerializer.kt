@@ -8,7 +8,7 @@ import tech.relialab.kotlin.clickhouse.exporter.api.v1.models.BaseResponse
 
 @Suppress("JSON_FORMAT_REDUNDANT_DEFAULT")
 val apiV1Mapper = Json {
-//    ignoreUnknownKeys = true
+    ignoreUnknownKeys = true
 }
 
 @Suppress("UNCHECKED_CAST")

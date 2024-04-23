@@ -1,7 +1,6 @@
-package tech.relialab.kotlin.clickhouse.exporter.mappers.v1
+package tech.relialab.kotlin.clickhouse.exporter.mappers.kmp.v1
 
 import tech.relialab.kotlin.clickhouse.exporter.api.v1.models.*
-import tech.relialab.kotlin.clickhouse.exporter.mappers.v1.exceptions.UnknownRequestClass
 import tech.relialab.kotlin.clickhouse.exporter.common.TemplateContext
 import tech.relialab.kotlin.clickhouse.exporter.common.models.*
 import tech.relialab.kotlin.clickhouse.exporter.common.stubs.TemplateStubs
@@ -12,11 +11,9 @@ fun TemplateContext.fromTransport(request: BaseRequest) = when (request) {
     is TemplateUpdateRequest -> fromTransport(request)
     is TemplateDeleteRequest -> fromTransport(request)
     is TemplateSearchRequest -> fromTransport(request)
-    else -> throw UnknownRequestClass(request.javaClass)
 }
 
 private fun String?.toTemplateId() = this?.let { TemplateId(it) } ?: TemplateId.NONE
-private fun String?.toTemplateWithId() = Template(id = this.toTemplateId())
 private fun String?.toTemplateLock() = this?.let { TemplateLock(it) } ?: TemplateLock.NONE
 
 private fun TemplateDebug?.transportToWorkMode(): TemplateWorkMode = when (this?.mode) {
@@ -57,7 +54,6 @@ private fun TemplateReadObject?.toInternal(): Template = if (this != null) {
 } else {
     Template()
 }
-
 
 fun TemplateContext.fromTransport(request: TemplateUpdateRequest) {
     command = TemplateCommand.UPDATE

@@ -1,4 +1,4 @@
-package tech.relialab.kotlin.clickhouse.exporter.mappers.v1
+package tech.relialab.kotlin.clickhouse.exporter.mappers.kmp.v1
 
 import tech.relialab.kotlin.clickhouse.exporter.api.v1.models.*
 import tech.relialab.kotlin.clickhouse.exporter.common.TemplateContext

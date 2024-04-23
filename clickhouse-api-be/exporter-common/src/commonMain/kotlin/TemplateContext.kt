@@ -14,9 +14,9 @@ data class TemplateContext(
 
     var requestId: TemplateRequestId = TemplateRequestId.NONE,
     var timeStart: Instant = Instant.NONE,
-    var adRequest: Template = Template(),
-    var adFilterRequest: TemplateFilter = TemplateFilter(),
+    var templateRequest: Template = Template(),
+    var templateFilterRequest: TemplateFilter = TemplateFilter(),
 
-    var adResponse: Template = Template(),
-    var adsResponse: MutableList<Template> = mutableListOf(),
+    var templateResponse: Template = Template(),
+    var templatesResponse: MutableList<Template> = mutableListOf(),
 )
