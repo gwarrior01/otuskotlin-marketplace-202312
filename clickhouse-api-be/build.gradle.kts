@@ -20,6 +20,7 @@ subprojects {
 ext {
     val specDir = layout.projectDirectory.dir("../specs")
     set("spec-v1", specDir.file("open-api-spec-template-v1.yaml").toString())
+    set("spec-log", specDir.file("open-api-spec-log.yaml").toString())
 }
 
 tasks {
