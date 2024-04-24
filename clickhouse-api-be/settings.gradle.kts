@@ -25,6 +25,7 @@ plugins {
 }
 
 include(":api-v1-kmp")
+include(":api-log")
 include(":api-v1-mappers")
 include(":exporter-common")
 include(":exporter-app-common")
