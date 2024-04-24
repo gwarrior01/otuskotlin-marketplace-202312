@@ -62,9 +62,6 @@ kotlin {
                 implementation(project(":api-v1-kmp"))
                 implementation(project(":exporter-stubs"))
 
-                // RabbitMQ
-//                implementation(project(":ok-marketplace-app-rabbit"))
-
                 implementation(libs.kotlinx.serialization.core)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.ktor.serialization.json)
@@ -91,18 +88,13 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
 
-//                // jackson
+                // jackson
                 implementation(libs.ktor.serialization.jackson)
                 implementation(libs.ktor.server.calllogging)
                 implementation(libs.ktor.server.headers.default)
 
-//                implementation(libs.logback)
-//
-//                // transport models
+                // transport models
                 implementation(project(":api-v1-kmp"))
-//                implementation(project(":api-v1-mappers"))
-
-
             }
         }
 
