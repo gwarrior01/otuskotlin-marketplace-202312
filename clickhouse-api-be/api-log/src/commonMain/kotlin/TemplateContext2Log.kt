@@ -9,11 +9,11 @@ fun TemplateContext.toLog(logId: String) = CommonLogModel(
     messageTime = Clock.System.now().toString(),
     logId = logId,
     source = "exporter",
-    ad = toMkplLog(),
+    ad = toTemplateLog(),
     errors = errors.map { it.toLog() },
 )
 
-private fun TemplateContext.toMkplLog(): TemplateLogModel? {
+private fun TemplateContext.toTemplateLog(): TemplateLogModel? {
     val adNone = Template()
     return TemplateLogModel(
         requestId = requestId.takeIf { it != TemplateRequestId.NONE }?.asString(),
