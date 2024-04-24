@@ -6,4 +6,6 @@ enum class TemplateCommand {
     UPDATE,
     DELETE,
     SEARCH,
+    INIT,
+    FINISH
 }

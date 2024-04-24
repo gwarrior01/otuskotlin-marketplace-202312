@@ -70,7 +70,7 @@ kotlin {
                 implementation(libs.ktor.serialization.json)
 
                 // logging
-//                implementation(project(":ok-marketplace-api-log1"))
+                implementation(project(":api-log"))
                 implementation("tech.relialab.kotlin.libs:lib-logging-common")
                 implementation("tech.relialab.kotlin.libs:lib-logging-kermit")
             }

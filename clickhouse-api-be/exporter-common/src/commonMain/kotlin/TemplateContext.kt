@@ -3,6 +3,7 @@ package tech.relialab.kotlin.clickhouse.exporter.common
 import kotlinx.datetime.Instant
 import tech.relialab.kotlin.clickhouse.exporter.common.models.*
 import tech.relialab.kotlin.clickhouse.exporter.common.stubs.TemplateStubs
+import tech.relialab.kotlin.clickhouse.exporter.common.ws.ExporterWsSession
 
 data class TemplateContext(
     var command: TemplateCommand = TemplateCommand.NONE,
@@ -11,6 +12,7 @@ data class TemplateContext(
 
     var workMode: TemplateWorkMode = TemplateWorkMode.PROD,
     var stubCase: TemplateStubs = TemplateStubs.NONE,
+    var wsSession: ExporterWsSession = ExporterWsSession.NONE,
 
     var requestId: TemplateRequestId = TemplateRequestId.NONE,
     var timeStart: Instant = Instant.NONE,

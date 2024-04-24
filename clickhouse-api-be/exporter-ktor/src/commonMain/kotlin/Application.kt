@@ -11,6 +11,7 @@ import io.ktor.server.websocket.*
 import tech.relialab.kotlin.clickhouse.exporter.api.v1.apiV1Mapper
 import tech.relialab.kotlin.clickhouse.exporter.app.ktor.plugins.initAppSettings
 import tech.relialab.kotlin.clickhouse.exporter.app.ktor.v1.v1Template
+import tech.relialab.kotlin.clickhouse.exporter.app.ktor.v1.wsHandlerV1
 
 fun Application.module(
     appSettings: AppSettings = initAppSettings()
@@ -36,6 +37,9 @@ fun Application.module(
                 json(apiV1Mapper)
             }
             v1Template(appSettings)
+            webSocket("/ws") {
+                wsHandlerV1(appSettings)
+            }
         }
     }
 }

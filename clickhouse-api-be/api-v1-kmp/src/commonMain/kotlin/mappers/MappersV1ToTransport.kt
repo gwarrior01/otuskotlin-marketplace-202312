@@ -11,6 +11,8 @@ fun TemplateContext.toTransportTemplate(): BaseResponse = when (val cmd = comman
     TemplateCommand.UPDATE -> toTransportUpdate()
     TemplateCommand.DELETE -> toTransportDelete()
     TemplateCommand.SEARCH -> toTransportSearch()
+    TemplateCommand.INIT -> toTransportInit()
+    TemplateCommand.FINISH -> throw UnknownTemplateCommand(cmd)
     TemplateCommand.NONE -> throw UnknownTemplateCommand(cmd)
 }
 
@@ -42,6 +44,11 @@ fun TemplateContext.toTransportSearch() = TemplateSearchResponse(
     result = state.toResult(),
     errors = errors.toTransportErrors(),
     templates = templatesResponse.toTransportTemplate()
+)
+
+fun TemplateContext.toTransportInit() = TemplateInitResponse(
+    result = state.toResult(),
+    errors = errors.toTransportErrors(),
 )
 
 fun List<Template>.toTransportTemplate(): List<TemplateResponseObject>? = this

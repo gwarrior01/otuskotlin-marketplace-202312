@@ -1,7 +1,9 @@
 package tech.relialab.kotlin.clickhouse.exporter.app.common
 
 import kotlinx.datetime.Clock
+import tech.relialab.kotlin.clickhouse.exporter.api.log.mapper.toLog
 import tech.relialab.kotlin.clickhouse.exporter.common.TemplateContext
+import tech.relialab.kotlin.clickhouse.exporter.common.helpers.asTemplateError
 import tech.relialab.kotlin.clickhouse.exporter.common.models.TemplateCommand
 import tech.relialab.kotlin.clickhouse.exporter.common.models.TemplateState
 import kotlin.reflect.KClass
@@ -21,23 +23,23 @@ suspend inline fun <T> IAppSettings.controllerHelper(
         logger.info(
             msg = "Request $logId started for ${clazz.simpleName}",
             marker = "BIZ",
-//            data = ctx.toLog(logId) // todo
+            data = ctx.toLog(logId)
         )
         processor.exec(ctx)
         logger.info(
             msg = "Request $logId processed for ${clazz.simpleName}",
             marker = "BIZ",
-//            data = ctx.toLog(logId) // todo
+            data = ctx.toLog(logId)
         )
         ctx.toResponse()
     } catch (e: Throwable) {
         logger.error(
             msg = "Request $logId failed for ${clazz.simpleName}",
             marker = "BIZ",
-//            data = ctx.toLog(logId) // todo
+            data = ctx.toLog(logId)
         )
         ctx.state = TemplateState.FAILING
-//        ctx.errors.add(e.asMkplError()) // todo
+        ctx.errors.add(e.asTemplateError())
         processor.exec(ctx)
         if (ctx.command == TemplateCommand.NONE) {
             ctx.command = TemplateCommand.READ

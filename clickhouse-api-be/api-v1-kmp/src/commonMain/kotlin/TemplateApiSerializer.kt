@@ -12,16 +12,16 @@ val apiV1Mapper = Json {
 }
 
 @Suppress("UNCHECKED_CAST")
-fun <T : BaseRequest> apiV2RequestDeserialize(json: String) =
+fun <T : BaseRequest> apiV1RequestDeserialize(json: String) =
     apiV1Mapper.decodeFromString<BaseRequest>(json) as T
 
-fun apiV2ResponseSerialize(obj: BaseResponse): String =
+fun apiV1ResponseSerialize(obj: BaseResponse): String =
     apiV1Mapper.encodeToString(BaseResponse.serializer(), obj)
 
 @Suppress("UNCHECKED_CAST")
-fun <T : BaseResponse> apiV2ResponseDeserialize(json: String) =
+fun <T : BaseResponse> apiV1ResponseDeserialize(json: String) =
     apiV1Mapper.decodeFromString<BaseResponse>(json) as T
 
 @Suppress("unused")
-fun apiV2RequestSerialize(obj: BaseRequest): String =
+fun apiV1RequestSerialize(obj: BaseRequest): String =
     apiV1Mapper.encodeToString(BaseRequest.serializer(), obj)
