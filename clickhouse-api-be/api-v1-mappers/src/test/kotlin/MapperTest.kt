@@ -1,12 +1,10 @@
-package ru.otus.otuskotlin.marketplace.mappers.v1
+package tech.relialab.kotlin.clickhouse.exporter.mappers.v1
 
 import org.junit.Test
 import tech.relialab.kotlin.clickhouse.exporter.api.v1.models.*
 import tech.relialab.kotlin.clickhouse.exporter.common.TemplateContext
 import tech.relialab.kotlin.clickhouse.exporter.common.models.*
 import tech.relialab.kotlin.clickhouse.exporter.common.stubs.TemplateStubs
-import tech.relialab.kotlin.clickhouse.exporter.mappers.v1.fromTransport
-import tech.relialab.kotlin.clickhouse.exporter.mappers.v1.toTransportAd
 import kotlin.test.assertEquals
 
 class MapperTest {
@@ -30,8 +28,8 @@ class MapperTest {
 
         assertEquals(TemplateStubs.SUCCESS, context.stubCase)
         assertEquals(TemplateWorkMode.STUB, context.workMode)
-        assertEquals("title", context.adRequest.title)
-        assertEquals(TemplateVisibilityClient.VISIBLE_PUBLIC, context.adRequest.visibility)
+        assertEquals("title", context.templateRequest.title)
+        assertEquals(TemplateVisibilityClient.VISIBLE_PUBLIC, context.templateRequest.visibility)
     }
 
     @Test
@@ -39,7 +37,7 @@ class MapperTest {
         val context = TemplateContext(
             requestId = TemplateRequestId("1234"),
             command = TemplateCommand.CREATE,
-            adResponse = Template(
+            templateResponse = Template(
                 title = "title",
                 description = "desc",
                 visibility = TemplateVisibilityClient.VISIBLE_PUBLIC,
@@ -55,7 +53,7 @@ class MapperTest {
             state = TemplateState.RUNNING,
         )
 
-        val req = context.toTransportAd() as TemplateCreateResponse
+        val req = context.toTransportTemplate() as TemplateCreateResponse
 
         assertEquals("title", req.template?.title)
         assertEquals("desc", req.template?.description)

@@ -21,6 +21,8 @@ kotlin {
 
                 implementation(libs.kotlinx.serialization.core)
                 implementation(libs.kotlinx.serialization.json)
+
+                implementation(project(":exporter-common"))
             }
         }
         val commonTest by getting {
