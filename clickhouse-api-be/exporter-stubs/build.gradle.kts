@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform")
+    id("build-kmp")
 }
 
 kotlin {
