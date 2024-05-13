@@ -1,4 +1,4 @@
-package tech.relialab.kotlin.clickhouse.exporter.bisiness.stubs
+package tech.relialab.kotlin.clickhouse.exporter.business.stubs
 
 import ICorChainDsl
 import tech.relialab.kotlin.clickhouse.exporter.common.CoreSettings

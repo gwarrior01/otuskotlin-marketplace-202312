@@ -1,4 +1,4 @@
-package tech.relialab.kotlin.clickhouse.exporter.bisiness.general
+package tech.relialab.kotlin.clickhouse.exporter.business.general
 
 import ICorChainDsl
 import tech.relialab.kotlin.clickhouse.exporter.common.TemplateContext

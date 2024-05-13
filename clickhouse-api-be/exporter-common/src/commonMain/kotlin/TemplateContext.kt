@@ -20,6 +20,11 @@ data class TemplateContext(
     var templateRequest: Template = Template(),
     var templateFilterRequest: TemplateFilter = TemplateFilter(),
 
+    var templateValidating: Template = Template(),
+    var templateFilterValidating: TemplateFilter = TemplateFilter(),
+    var templateValidated: Template = Template(),
+    var templateFilterValidated: TemplateFilter = TemplateFilter(),
+
     var templateResponse: Template = Template(),
     var templatesResponse: MutableList<Template> = mutableListOf(),
 )

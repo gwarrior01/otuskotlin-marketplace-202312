@@ -1,7 +1,7 @@
-package tech.relialab.kotlin.clickhouse.exporter.bisiness.stub
+package tech.relialab.kotlin.clickhouse.exporter.business.stub
 
 import kotlinx.coroutines.test.runTest
-import tech.relialab.kotlin.clickhouse.exporter.bisiness.TemplateProcessor
+import tech.relialab.kotlin.clickhouse.exporter.business.TemplateProcessor
 import tech.relialab.kotlin.clickhouse.exporter.common.TemplateContext
 import tech.relialab.kotlin.clickhouse.exporter.common.models.*
 import tech.relialab.kotlin.clickhouse.exporter.common.stubs.TemplateStubs
