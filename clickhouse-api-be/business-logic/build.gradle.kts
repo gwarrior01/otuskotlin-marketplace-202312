@@ -10,6 +10,8 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-common"))
 
+                implementation(libs.cor)
+
                 implementation(project(":exporter-common"))
                 implementation(project(":exporter-stubs"))
             }
@@ -18,6 +20,8 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+
+                api(libs.coroutines.test)
             }
         }
         jvmMain {

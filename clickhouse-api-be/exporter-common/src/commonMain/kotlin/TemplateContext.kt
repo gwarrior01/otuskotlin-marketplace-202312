@@ -10,6 +10,7 @@ data class TemplateContext(
     var state: TemplateState = TemplateState.NONE,
     val errors: MutableList<TemplateError> = mutableListOf(),
 
+    var corSettings: CoreSettings = CoreSettings(),
     var workMode: TemplateWorkMode = TemplateWorkMode.PROD,
     var stubCase: TemplateStubs = TemplateStubs.NONE,
     var wsSession: ExporterWsSession = ExporterWsSession.NONE,
