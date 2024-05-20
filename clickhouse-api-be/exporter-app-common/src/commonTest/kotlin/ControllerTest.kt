@@ -2,7 +2,7 @@ package tech.relialab.kotlin.clickhouse.exporter.app.common
 
 import kotlinx.coroutines.test.runTest
 import tech.relialab.kotlin.clickhouse.exporter.api.v1.models.*
-import tech.relialab.kotlin.clickhouse.exporter.bisiness.TemplateProcessor
+import tech.relialab.kotlin.clickhouse.exporter.business.TemplateProcessor
 import tech.relialab.kotlin.clickhouse.exporter.common.CoreSettings
 import tech.relialab.kotlin.clickhouse.exporter.mappers.kmp.v1.fromTransport
 import tech.relialab.kotlin.clickhouse.exporter.mappers.kmp.v1.toTransportTemplate

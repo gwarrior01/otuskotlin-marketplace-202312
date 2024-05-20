@@ -7,6 +7,8 @@ import tech.relialab.kotlin.clickhouse.exporter.stubs.Stubs.TEST_TEMPLATE
 object TemplateStub {
     fun get(): Template = TEST_TEMPLATE.copy()
 
+    fun prepareResult(block: Template.() -> Unit): Template = get().apply(block)
+
     fun prepareSearchList(filter: String) = listOf(
         templateTest("177", filter),
         templateTest("277", filter),

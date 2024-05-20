@@ -9,6 +9,10 @@ data class Template(
     var lock: TemplateLock = TemplateLock.NONE,
     val permissionsClient: MutableSet<TemplatePermissionClient> = mutableSetOf()
 ) {
+    fun deepCopy(): Template = copy(
+        permissionsClient = permissionsClient.toMutableSet(),
+    )
+
     fun isEmpty() = this == NONE
 
     companion object {

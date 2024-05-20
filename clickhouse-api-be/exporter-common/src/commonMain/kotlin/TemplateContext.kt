@@ -10,6 +10,7 @@ data class TemplateContext(
     var state: TemplateState = TemplateState.NONE,
     val errors: MutableList<TemplateError> = mutableListOf(),
 
+    var corSettings: CoreSettings = CoreSettings(),
     var workMode: TemplateWorkMode = TemplateWorkMode.PROD,
     var stubCase: TemplateStubs = TemplateStubs.NONE,
     var wsSession: ExporterWsSession = ExporterWsSession.NONE,
@@ -18,6 +19,11 @@ data class TemplateContext(
     var timeStart: Instant = Instant.NONE,
     var templateRequest: Template = Template(),
     var templateFilterRequest: TemplateFilter = TemplateFilter(),
+
+    var templateValidating: Template = Template(),
+    var templateFilterValidating: TemplateFilter = TemplateFilter(),
+    var templateValidated: Template = Template(),
+    var templateFilterValidated: TemplateFilter = TemplateFilter(),
 
     var templateResponse: Template = Template(),
     var templatesResponse: MutableList<Template> = mutableListOf(),
